@@ -14,13 +14,13 @@ UEIK_OpenReportsUI_AsyncFunction* UEIK_OpenReportsUI_AsyncFunction::ShowEIKPlaye
 
 void UEIK_OpenReportsUI_AsyncFunction::SendReportFunc()
 {
-    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
     {
         if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
         {
             if (EOSRef->ReportsHandle != nullptr)
             {
-                if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get())
+                if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get("EIK"))
                 {
                     EOS_UI_ShowReportPlayerOptions ShowReportPlayerOptions;
                     ShowReportPlayerOptions.ApiVersion = EOS_UI_SHOWREPORTPLAYER_API_LATEST;

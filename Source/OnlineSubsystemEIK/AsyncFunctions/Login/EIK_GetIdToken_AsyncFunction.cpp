@@ -19,7 +19,7 @@ UEIK_GetIdToken_AsyncFunction* UEIK_GetIdToken_AsyncFunction::GetEIKAuthToken(FS
 
 void UEIK_GetIdToken_AsyncFunction::GetAuthToken()
 {
-    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
     {
         if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
         {

@@ -29,7 +29,7 @@ void UEIK_GetTitleData_AsyncFunction::OnGetFileProgress(const FString& FileName1
 
 void UEIK_GetTitleData_AsyncFunction::GetTitleData()
 {
-	if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get())
+	if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if (const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -111,7 +111,7 @@ void UEIK_GetTitleData_AsyncFunction::OnGetFileComplete(bool bSuccess, const FSt
 {
 	if (bSuccess)
 	{
-		if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get())
+		if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get("EIK"))
 		{
 			if (const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 			{

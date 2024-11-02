@@ -632,7 +632,7 @@ bool UEIK_BlueprintFunctions::IsEIKActive()
 
 FName UEIK_BlueprintFunctions::GetActiveSubsystem()
 {
-	if (const IOnlineSubsystem* OnlineSubsystem = IOnlineSubsystem::Get())
+	if (const IOnlineSubsystem* OnlineSubsystem = IOnlineSubsystem::Get("EIK"))
 	{
 		return  OnlineSubsystem->GetSubsystemName();
 	}

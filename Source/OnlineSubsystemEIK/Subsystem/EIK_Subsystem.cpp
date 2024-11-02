@@ -23,7 +23,7 @@
 UEIK_Subsystem::UEIK_Subsystem()
 {
 	// Add the delegate to the online subsystem
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
@@ -36,7 +36,7 @@ UEIK_Subsystem::UEIK_Subsystem()
 void UEIK_Subsystem::Login(int32 LocalUserNum, FString ID, FString Token , FString Type, const FBP_Login_Callback& Result)
 {
 	LoginCallBackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -105,7 +105,7 @@ If the online subsystem or the identity interface cannot be retrieved, the metho
 void UEIK_Subsystem::Logout(int32 LocalUserNum, const FBP_Logout_Callback& Result)
 {
 	LogoutCallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -131,7 +131,7 @@ If the online subsystem or the identity interface cannot be retrieved, the metho
  */
 FString UEIK_Subsystem::GetPlayerNickname(const int32 LocalUserNum)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -149,7 +149,7 @@ If the online subsystem or the identity interface cannot be retrieved, the metho
  */
 bool UEIK_Subsystem::GetLoginStatus(const int32 LocalUserNum)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -271,7 +271,7 @@ void UEIK_Subsystem::FindEOSSession(const FBP_FindSession_Callback& Result, TMap
 	EMatchType MatchType, ERegionInfo RegionToSearch)
 {
 	FindSession_CallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
@@ -318,7 +318,7 @@ void UEIK_Subsystem::FindEOSSession(const FBP_FindSession_Callback& Result, TMap
 void UEIK_Subsystem::DestroyEosSession(const FBP_DestroySession_Callback& Result, FName SessionName)
 {
 	DestroySession_CallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
@@ -444,7 +444,7 @@ FString UEIK_Subsystem::GetEpicID(const FEIKUniqueNetId& UniqueNetId)
 
 void UEIK_Subsystem::UnRegisterPlayer(FName SessionName)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
@@ -458,7 +458,7 @@ void UEIK_Subsystem::UnRegisterPlayer(FName SessionName)
 
 void UEIK_Subsystem::RegisterPlayer(FName SessionName,  bool bWasInvited)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
@@ -472,7 +472,7 @@ void UEIK_Subsystem::RegisterPlayer(FName SessionName,  bool bWasInvited)
 
 void UEIK_Subsystem::StartSession(FName SessionName)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
@@ -483,7 +483,7 @@ void UEIK_Subsystem::StartSession(FName SessionName)
 
 void UEIK_Subsystem::EndSession(FName SessionName)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
@@ -494,7 +494,7 @@ void UEIK_Subsystem::EndSession(FName SessionName)
 
 bool UEIK_Subsystem::ShowFriendUserInterface()
 {
-	const IOnlineSubsystem* OnlineSubsystem = IOnlineSubsystem::Get(); // Get the Online Subsystem
+	const IOnlineSubsystem* OnlineSubsystem = IOnlineSubsystem::Get("EIK"); // Get the Online Subsystem
 	if (OnlineSubsystem != nullptr)
 	{
 		const IOnlineExternalUIPtr ExternalUI = OnlineSubsystem->GetExternalUIInterface();        
@@ -516,7 +516,7 @@ bool UEIK_Subsystem::ShowFriendUserInterface()
 void UEIK_Subsystem::UpdateStats(const FBP_UpdateStat_Callback& Result, FString StatName, int32 Amount)
 {
 	UpdateStat_CallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -535,7 +535,7 @@ void UEIK_Subsystem::UpdateStats(const FBP_UpdateStat_Callback& Result, FString 
 void UEIK_Subsystem::GetStats(const FBP_GetStats_Callback& Result, TArray<FString> StatName)
 {
 	GetStats_CallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -752,7 +752,7 @@ FString UEIK_Subsystem::GenerateSessionCode(int32 CodeLength) const
 
 bool UEIK_Subsystem::OnHostMigrated(const FBP_HostMigration_Callback& Result)
 {
-	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{
@@ -773,7 +773,7 @@ void UEIK_Subsystem::SetPlayerData(const FBP_WriteFile_Callback& Result, FString
 		UGameplayStatics::SaveGameToMemory(SavedGame,LocalArray);
 		if(LocalArray.Num() > 0)
 		{
-			if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get() )
+			if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK") )
 			{
 				if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 				{
@@ -812,7 +812,7 @@ void UEIK_Subsystem::SetPlayerData(const FBP_WriteFile_Callback& Result, FString
 void UEIK_Subsystem::GetPlayerData(const FBP_GetFile_Callback& Result, FString FileName)
 {
 	GetFile_CallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -842,7 +842,7 @@ void UEIK_Subsystem::EnumerateTitleFiles(const FBP_TitleFileList_Callback& Resul
 {
 	//Coming in Update 1.12
 	TitleFileList_CallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -869,7 +869,7 @@ void UEIK_Subsystem::EnumerateTitleFiles(const FBP_TitleFileList_Callback& Resul
 
 TArray<FFileListStruct> UEIK_Subsystem::GetTitleFileList()
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -901,7 +901,7 @@ TArray<FFileListStruct> UEIK_Subsystem::GetTitleFileList()
 void UEIK_Subsystem::GetTitleFile(const FBP_GetTitleFile_Callback& Result,FString FileName)
 {
 	GetTitleFile_CallbackBP = Result;
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -918,7 +918,7 @@ void UEIK_Subsystem::GetTitleFile(const FBP_GetTitleFile_Callback& Result,FStrin
 
 TArray<uint8> UEIK_Subsystem::GetTitleFileContent(FString FileName)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -935,7 +935,7 @@ TArray<uint8> UEIK_Subsystem::GetTitleFileContent(FString FileName)
 
 void UEIK_Subsystem::GetLeaderboard(const FBP_GetFile_Callback& Result, FName LeaderboardName, int32 Rank, int32 Range)
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(IOnlineIdentityPtr Identity = SubsystemRef->GetIdentityInterface())
 		{
@@ -982,7 +982,7 @@ void UEIK_Subsystem::OnCreateLobbyCompleted(FName SessionName, bool bWasSuccessf
 {
 	if(bWasSuccessful)
 	{
-		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 		{
 			if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 			{
@@ -1011,7 +1011,7 @@ void UEIK_Subsystem::OnCreateLobbyCompleted(FName SessionName, bool bWasSuccessf
 
 void UEIK_Subsystem::OnFindSessionCompleted(bool bWasSuccess) const
 {
-	if (const IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if (const IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		TArray<FSessionFindStruct> SessionResult_Array;
 		IOnlineSessionPtr Sessions = OnlineSub->GetSessionInterface();
@@ -1058,7 +1058,7 @@ void UEIK_Subsystem::OnJoinSessionCompleted(FName SessionName, EOnJoinSessionCom
 	{
 		if(APlayerController* PlayerControllerRef = UGameplayStatics::GetPlayerController(GetWorld(),0))
 		{
-			if(const IOnlineSubsystem *SubsystemRef =  IOnlineSubsystem::Get())
+			if(const IOnlineSubsystem *SubsystemRef =  IOnlineSubsystem::Get("EIK"))
 			{
 				if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 				{
@@ -1168,7 +1168,7 @@ void UEIK_Subsystem::OnGetFileComplete(bool bSuccess, const FUniqueNetId& UserID
 {
 	if(bSuccess)
 	{
-		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 		{
 			if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 			{
@@ -1274,7 +1274,7 @@ void UEIK_Subsystem::OnCreateSessionCompleted(FName SessionName, bool bWasSucces
 {
 	if(bWasSuccessful)
 	{
-		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 		{
 			if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 			{

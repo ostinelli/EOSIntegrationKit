@@ -20,7 +20,7 @@ UEIK_GetPUIDFromEpicId_AsyncFunc* UEIK_GetPUIDFromEpicId_AsyncFunc::EIKGetPUIDFr
 
 void UEIK_GetPUIDFromEpicId_AsyncFunc::GetPUIDFromEpicId()
 {
-	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{
@@ -101,7 +101,7 @@ void UEIK_GetPUIDFromEpicId_AsyncFunc::OnQueryExternalAccountMappingsComplete(co
 
 void UEIK_GetPUIDFromEpicId_AsyncFunc::QueryExternalAccountMappingsSuccess()
 {
-	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{

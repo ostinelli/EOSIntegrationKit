@@ -85,7 +85,7 @@ void UEIK_JoinSession_AsyncFunction::OnJoinSessionCompleted(FName SessionName, E
 	{
 		if (APlayerController* PlayerControllerRef = UGameplayStatics::GetPlayerController(Var_WorldContextObject, 0))
 		{
-			if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get())
+			if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get("EIK"))
 			{
 				const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface();
 				if (SessionPtrRef.IsValid())

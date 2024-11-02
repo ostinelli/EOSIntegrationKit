@@ -26,7 +26,7 @@ UEIK_GetLeaderboardForUserIds* UEIK_GetLeaderboardForUserIds::GetEIKLeaderboardF
 
 void UEIK_GetLeaderboardForUserIds::GetLeaderboardForUserIds()
 {
-    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
     {
         if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
         {
@@ -135,7 +135,7 @@ void UEIK_GetLeaderboardForUserIds::GetLeaderboardForUserIdsCallback(const EOS_L
 
 void UEIK_GetLeaderboardForUserIds::ResultSuccess()
 {
-    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
     {
         if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
         {

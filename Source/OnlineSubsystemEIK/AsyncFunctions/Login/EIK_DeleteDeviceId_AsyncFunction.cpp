@@ -36,7 +36,7 @@ void UEIK_DeleteDeviceId_AsyncFunction::OnDeleteDeviceIdComplete(const EOS_Conne
 
 void UEIK_DeleteDeviceId_AsyncFunction::Activate()
 {
-	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{

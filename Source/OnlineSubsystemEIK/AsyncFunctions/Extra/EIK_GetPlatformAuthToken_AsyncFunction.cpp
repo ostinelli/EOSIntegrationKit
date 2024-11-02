@@ -35,7 +35,7 @@ void UEIK_GetPlatformAuthToken_AsyncFunction::OnGetPlatformAuthTokenComplete(int
 void UEIK_GetPlatformAuthToken_AsyncFunction::Activate()
 {
 	Super::Activate();
-	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{

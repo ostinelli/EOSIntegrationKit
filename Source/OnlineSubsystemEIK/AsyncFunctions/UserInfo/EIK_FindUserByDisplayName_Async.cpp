@@ -19,13 +19,13 @@ UEIK_FindUserByDisplayName_Async* UEIK_FindUserByDisplayName_Async::FindEIkUserB
 
 void UEIK_FindUserByDisplayName_Async::FindUserByDisplayName()
 {
-    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+    if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
     {
         if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
         {
             if (EOSRef->ReportsHandle != nullptr)
             {
-                if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get())
+                if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get("EIK"))
                 {
                     if (const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
                     {
@@ -69,13 +69,13 @@ void UEIK_FindUserByDisplayName_Async::FindUserByDisplayNameCallback(const EOS_U
     {
         if (Data->ResultCode == EOS_EResult::EOS_Success)
         {
-            if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+            if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
             {
                 if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
                 {
                     if (EOSRef->UserInfoHandle != nullptr)
                     {
-                        if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get())
+                        if (const IOnlineSubsystem* SubsystemRef = IOnlineSubsystem::Get("EIK"))
                         {
                             EOS_UserInfo_CopyUserInfoOptions CopyUserInfoObj;
                             CopyUserInfoObj.ApiVersion = EOS_USERINFO_COPYUSERINFO_API_LATEST;

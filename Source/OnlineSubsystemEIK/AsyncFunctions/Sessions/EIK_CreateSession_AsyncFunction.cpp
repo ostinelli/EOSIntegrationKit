@@ -118,7 +118,7 @@ void UEIK_CreateSession_AsyncFunction::OnCreateSessionCompleted(FName SessionNam
 	{
 		if(bDelegateCalled == false)
 		{
-			const IOnlineSessionPtr Sessions = IOnlineSubsystem::Get()->GetSessionInterface();
+			const IOnlineSessionPtr Sessions = IOnlineSubsystem::Get("EIK")->GetSessionInterface();
 			if(const FOnlineSession* CurrentSession = Sessions->GetNamedSession(VSessionName))
 			{
 				OnSuccess.Broadcast(CurrentSession->SessionInfo.Get()->GetSessionId().ToString());

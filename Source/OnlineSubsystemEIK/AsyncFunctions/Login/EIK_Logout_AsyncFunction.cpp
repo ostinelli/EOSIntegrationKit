@@ -20,7 +20,7 @@ void UEIK_Logout_AsyncFunction::Activate()
 
 void UEIK_Logout_AsyncFunction::LogoutPlayer()
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{

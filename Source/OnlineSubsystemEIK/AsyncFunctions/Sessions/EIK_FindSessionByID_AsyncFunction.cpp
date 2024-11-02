@@ -23,11 +23,11 @@ void UEIK_FindSessionByID_AsyncFunction::Activate()
 
 void UEIK_FindSessionByID_AsyncFunction::FindSession()
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{
-			const FUniqueNetIdPtr SearchingUserId = IOnlineSubsystem::Get()->GetIdentityInterface()->GetUniquePlayerId(0);
+			const FUniqueNetIdPtr SearchingUserId = IOnlineSubsystem::Get("EIK")->GetIdentityInterface()->GetUniquePlayerId(0);
 			const FUniqueNetIdRef UserNetId = FUniqueNetIdString::Create(SearchingUserId.Get()->ToString(),"EIK");
 			const FUniqueNetIdRef SessionID = FUniqueNetIdString::Create(Var_SessionID,"EIK");
 #if ENGINE_MAJOR_VERSION == 5
@@ -75,7 +75,7 @@ void UEIK_FindSessionByID_AsyncFunction::OnFindSessionCompleted(int I, bool bWas
 {
 	if (bWasSuccessful)
 	{
-		if (const IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+		if (const IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 		{
 			IOnlineSessionPtr Sessions = OnlineSub->GetSessionInterface();
 			if (Sessions.IsValid())

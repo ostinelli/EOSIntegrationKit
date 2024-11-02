@@ -20,7 +20,7 @@ UEIK_SendReport_AsyncFunction* UEIK_SendReport_AsyncFunction::SendEIKPlayerRepor
 // Function to send the player behavior report
 void UEIK_SendReport_AsyncFunction::SendReportFunc()
 {
-	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{

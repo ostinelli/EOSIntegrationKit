@@ -21,7 +21,7 @@ UEIK_GetExternalAccountsFromPUID* UEIK_GetExternalAccountsFromPUID::EIKGetExtern
 
 void UEIK_GetExternalAccountsFromPUID::GetExternalAccountsFromPuid()
 {
-	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{
@@ -100,7 +100,7 @@ void UEIK_GetExternalAccountsFromPUID::OnQueryProductUserIdMappingsComplete(cons
 
 void UEIK_GetExternalAccountsFromPUID::QueryProductUserIdMappingsSuccess()
 {
-	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if (IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{

@@ -21,7 +21,7 @@ void UEIK_GetLeaderboards_AsyncFunction::Activate()
 
 void UEIK_GetLeaderboards_AsyncFunction::GetLeaderboardLocal()
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{

@@ -23,7 +23,7 @@ void UEIK_DestroySession_AsyncFunction::Activate()
 
 void UEIK_DestroySession_AsyncFunction::DestroySession()
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineSessionPtr SessionPtrRef = SubsystemRef->GetSessionInterface())
 		{

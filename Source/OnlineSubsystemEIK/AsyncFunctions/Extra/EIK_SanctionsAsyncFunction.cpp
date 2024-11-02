@@ -16,7 +16,7 @@ UEIK_SanctionsAsyncFunction* UEIK_SanctionsAsyncFunction::GetEikPlayerSanctionsA
 
 void UEIK_SanctionsAsyncFunction::Func_GetSanctions()
 {
-	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{
@@ -59,7 +59,7 @@ void UEIK_SanctionsAsyncFunction::ReturnFunc(const EOS_Sanctions_QueryActivePlay
 
 void UEIK_SanctionsAsyncFunction::GetFinalValues()
 {
-	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get())
+	if(	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get("EIK"))
 	{
 		if (FOnlineSubsystemEOS* EOSRef = static_cast<FOnlineSubsystemEOS*>(OnlineSub))
 		{

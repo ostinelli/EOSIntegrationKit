@@ -104,7 +104,7 @@ void UEIK_CreateLobby_AsyncFunction::OnCreateLobbyCompleted(FName SessionName, b
 	{
 		if(bDelegateCalled == false)
 		{
-			const IOnlineSessionPtr Sessions = IOnlineSubsystem::Get()->GetSessionInterface();
+			const IOnlineSessionPtr Sessions = IOnlineSubsystem::Get("EIK")->GetSessionInterface();
 			if(const FOnlineSession* CurrentSession = Sessions->GetNamedSession(VSessionName))
 			{
 				OnSuccess.Broadcast(CurrentSession->SessionInfo.Get()->GetSessionId().ToString());

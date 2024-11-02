@@ -25,7 +25,7 @@ void UEIK_GetPlayerData_AsyncFunction::Activate()
 
 void UEIK_GetPlayerData_AsyncFunction::GetPlayerData()
 {
-	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+	if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 	{
 		if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 		{
@@ -103,7 +103,7 @@ void UEIK_GetPlayerData_AsyncFunction::OnGetFileComplete(bool bSuccess, const FU
 {
 	if(bSuccess)
 	{
-		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get())
+		if(const IOnlineSubsystem *SubsystemRef = IOnlineSubsystem::Get("EIK"))
 		{
 			if(const IOnlineIdentityPtr IdentityPointerRef = SubsystemRef->GetIdentityInterface())
 			{
