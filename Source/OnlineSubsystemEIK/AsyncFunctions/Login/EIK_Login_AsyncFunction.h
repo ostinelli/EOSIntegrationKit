@@ -14,8 +14,7 @@
 #endif
 #include "EIK_Login_AsyncFunction.generated.h"
 
-
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FResponsDelegate, FEIK_ProductUserId, ProductUserID, FString, Error);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FResponsDelegate, FString, ClientProductId, FString, Error);
 
 UCLASS()
 class ONLINESUBSYSTEMEIK_API UEIK_Login_AsyncFunction : public UBlueprintAsyncActionBase

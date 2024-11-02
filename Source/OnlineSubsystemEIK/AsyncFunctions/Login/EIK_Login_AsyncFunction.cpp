@@ -41,7 +41,7 @@ void UEIK_Login_AsyncFunction::Activate()
 		}
 	}
 	UE_LOG(LogEIK, Error, TEXT("LoginUsingConnectInterface: Subsystem or Identity Interface is not valid"));
-	OnFail.Broadcast(FEIK_ProductUserId(), "Subsystem or Identity Interface is not valid");
+	OnFail.Broadcast("", "Subsystem or Identity Interface is not valid");
 	SetReadyToDestroy();
 #if ENGINE_MAJOR_VERSION == 5
 	MarkAsGarbage();
@@ -58,18 +58,18 @@ void UEIK_Login_AsyncFunction::LoginCallback(int32 LocalUserNum, bool bWasSucces
 		if(UserId.IsValid())
 		{
 			UE_LOG(LogEIK, Verbose, TEXT("LoginUsingConnectInterface: Login was successful. UserID: %s"), *UserId.ToString());
-			OnSuccess.Broadcast(EOS_ProductUserId_FromString(TCHAR_TO_ANSI(*UserId.ToString())), "");
+			OnSuccess.Broadcast(*UserId.ToString(), "");
 		}
 		else
 		{
 			UE_LOG(LogEIK, Error, TEXT("LoginUsingConnectInterface: Login was successful but UserID is not valid"));
-			OnFail.Broadcast(FEIK_ProductUserId(), "UserID is not valid");
+			OnFail.Broadcast("", "UserID is not valid");
 		}
 	}
 	else
 	{
 		UE_LOG(LogEIK, Error, TEXT("LoginUsingConnectInterface: Login failed. Error: %s"), *Error);
-		OnFail.Broadcast(FEIK_ProductUserId(), Error);
+		OnFail.Broadcast("", Error);
 	}
 	SetReadyToDestroy();
 #if ENGINE_MAJOR_VERSION == 5
