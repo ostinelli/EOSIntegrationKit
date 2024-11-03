@@ -1,3 +1,56 @@
+⚠️ This is a fork of the original [EOS Integration Kit](https://github.com/betidestudio/EOSIntegrationKit) from Betide Studio.
+
+This fork serves a very specific use case: adding Easy Anti-Cheat to a pre-existing PC game that uses Steam as the default subsystem via the Advanced Sessions Plugin. Easy Anti-Cheat requires the EOS subsystem to work properly, which creates some integration issues that this fork resolves.
+
+There are instructions on how to integrate the EOS Integration Kit with Steam provided in the [official documentation](https://eik.betide.studio/integrations/steamintegrationkit). However, these instructions did not work for us in the specific case of adding Easy Anti-Cheat.
+
+# Setup
+
+## Plugin
+Install this fork of the plugin by copying its contents into the `.\Plugins` folder of your Unreal Engine project.
+
+## Config Files
+In `DefaultEngine.ini`, set EIK as `NativePlatformService` and enable it:
+
+```
+[OnlineSubsystem]
+DefaultPlatformService=Steam
+NativePlatformService=EIK
+
+[OnlineSubsystemEIK]
+bEnabled=true
+```
+
+> We keep Steam as the `DefaultPlatformService`, which allows all Steam session-related functionalities and Unique Net IDs to continue working properly (otherwise, they would be taken over by EIK). In our experience, we still needed to specify EIK as the `NativePlatformService` to avoid editor crashes on EIK subsystem shutdown or compiled builds not exiting processes properly (leaving ghost processes hanging).
+>
+> There might be a better way to do this; however, the EIK plugin assumes it is used as a Platform Service, and if used as a standard subsystem, it will require some additional design changes.
+
+## EOS Login
+You need to log in to EOS for Anti-Cheat, and it cannot use a non-permanent identification method such as `DeviceId`. Therefore, follow [these instructions](https://eik.betide.studio/Authentication/methods/steam) to log in with a `Steam Session Ticket`.
+
+The difference with this fork of EIK is that you will not get a `Product User ID` from the `Login Using Connect Interface node`. Instead, you will get a string `Client Product ID` that you MUST save for future reference (for example, in your Game Instance).
+
+> In standard usage, the resulting ID is saved by EIK in the `Unique Net ID` of the Player Controller, which then gets replicated to all clients. However, since we are forcing Steam to be the Default Platform, the Unique Net IDs are set by Steam, not EIK. Therefore, we need to manually store these IDs on every client and pass them along at a later stage (see below).
+
+## Plugin
+Follow these tutorials:
+
+* [Plugin Configuration](https://eik.betide.studio/getting-started/configuration)
+* [Anti-Cheat Blueprint Setup](https://eik.betide.studio/multiplayer/anti-cheat)
+
+There's also a [video](https://www.youtube.com/watch?v=PvO_2O6ikls) explaining the same concepts. While it is tagged as version `v3`, the same code seems to apply.
+
+You will need to modify the resulting code in the following way:
+
+* In the Game Mode blueprint, instead of the `OnPostLogin` event, create a new custom event, for example, called `Register EAC Client On Server`, which takes a `Player Controller` and a `Client Product ID` as input parameters. Plug these two inputs into EIK's node `Register Client for Anti Cheat` directly.
+* In the Player Controller blueprint, create a new custom event, for example, called `Server Register EAC Client`, which takes a `Client Product ID` as an input parameter. The event must `Run on Server` reliably. This event calls the Game Mode's `Register EAC Client On Server` event defined in the previous point and passes the `Client Product ID` and `Self` as the Player Controller inputs.
+* Still in the Player Controller blueprint, call this newly created event `Server Register EAC Client` after registering the client with EIK's node `Register Anti Cheat Client`, passing in the `Client Product ID `that you previously saved on every client after the EOS login.
+
+> Basically, what we are doing is substituting the `OnPostLogin` functionality with a custom one so that we can pass along the EOS Client Product IDs of every client, which are not stored in the Player Controllers as Unique Net IDs since we use Steam as the Default Platform.
+
+<br />
+<hr />
+
 <h1 align="center" id="title">EOS Integration Kit V4</h1>
 
 <p align="center"><img src="https://socialify.git.ci/betidestudio/EOSIntegrationKit/image?description=1&amp;descriptionEditable=Integrate%20EOS%20in%20few%20clicks%2C%20or%20that%27s%20what%20we%20want%20%3B)&amp;font=Inter&amp;forks=1&amp;language=1&amp;name=1&amp;pattern=Plus&amp;stargazers=1&amp;theme=Auto" alt="project-image" width="600" height="338/"></p>
