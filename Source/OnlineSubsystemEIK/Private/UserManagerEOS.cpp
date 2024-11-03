@@ -263,18 +263,8 @@ void FUserManagerEOS::LoginStatusChanged(const EOS_Auth_LoginStatusChangedCallba
 
 IOnlineSubsystem* FUserManagerEOS::GetPlatformOSS() const
 {
-	IOnlineSubsystem* PlatformOSS = IOnlineSubsystem::GetByPlatform();
-	if (PlatformOSS == nullptr)
-#if !PLATFORM_DESKTOP
-	{
-		UE_LOG_ONLINE(Error, TEXT("GetPlatformOSS() failed due to no platform OSS being configured"));
-	}
-#else
-	{
-		// Attempt to load Steam before treating it as an error
-		PlatformOSS = IOnlineSubsystem::Get(STEAM_SUBSYSTEM);
-	}
-#endif
+	/* Force Steam as PlatformOSS */
+	IOnlineSubsystem* PlatformOSS = IOnlineSubsystem::Get(STEAM_SUBSYSTEM);
 	return PlatformOSS;
 }
 
